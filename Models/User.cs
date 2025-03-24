@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace HotelBookingApi.Models;
 
@@ -9,8 +8,11 @@ public partial class User
     public Guid Id { get; set; }
 
     public Guid UserRoleId { get; set; }
+
     public string FullName { get; set; } = null!;
+
     public string Email { get; set; } = null!;
+
     public string PasswordHash { get; set; } = null!;
 
     public string? Phone { get; set; }

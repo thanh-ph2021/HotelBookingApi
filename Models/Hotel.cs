@@ -29,7 +29,11 @@ public partial class Hotel
 
     public DateTime? UpdatedAt { get; set; }
 
+    public bool IsDeleted { get; set; }
+
     public virtual ICollection<Favorite> Favorites { get; set; } = new List<Favorite>();
+
+    public virtual ICollection<HotelImage> HotelImages { get; set; } = new List<HotelImage>();
 
     public virtual User Owner { get; set; } = null!;
 

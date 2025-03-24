@@ -1,5 +1,8 @@
-﻿using HotelBookingApi.DTOs;
+﻿using Azure.Core;
+using HotelBookingApi.Common;
+using HotelBookingApi.DTOs;
 using HotelBookingApi.Models;
+using HotelBookingApi.Models.Requests;
 using HotelBookingApi.Repositories;
 
 namespace HotelBookingApi.Services
@@ -13,25 +16,29 @@ namespace HotelBookingApi.Services
             _repository = repository;
         }
 
-        public void CreateHotel(HotelDto hotelDto)
+        public async Task<HotelResponseDto> CreateHotelAsync(CreateHotelRequest request)
         {
-            var hotel = new Hotel
-            {
-                Name = hotelDto.Name,
-                Address = hotelDto.Address
-            };
-
-            _repository.AddHotel(hotel);
+            return await _repository.CreateHotelAsync(request);
         }
 
-        public IEnumerable<HotelDto> GetHotels()
+        public async Task<Result<bool>> DeleteHotelAsync(Guid id)
         {
-            return _repository.GetAllHotels()
-                .Select(h => new HotelDto
-                {
-                    Name = h.Name,
-                    Address = h.Address
-                });
+            return await _repository.DeleteHotelAsync(id);
+        }
+
+        public async Task<IEnumerable<HotelDto>> FilterHotelsAsync(FilterHotelRequest request)
+        {
+            return await _repository.FilterHotelsAsync(request);
+        }
+
+        public async Task<HotelDetailResponse> GetHotelByIdAsync(Guid id)
+        {
+            return await _repository.GetHotelByIdAsync(id);
+        }
+
+        public async Task<HotelResponseDto> UpdateHotelAsync(UpdateHotelRequest request)
+        {
+            return await _repository.UpdateHotelAsync(request);
         }
     }
 }

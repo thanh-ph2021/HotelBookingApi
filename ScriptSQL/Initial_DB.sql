@@ -43,6 +43,15 @@ CREATE TABLE Hotels (
     REFERENCES Users(Id) ON DELETE CASCADE
 );
 
+CREATE TABLE HotelImages (
+    Id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+    HotelId UNIQUEIDENTIFIER NOT NULL,
+    ImageUrl NVARCHAR(500) NOT NULL,
+    IsBanner BIT DEFAULT 0, -- 1: banner image, 0: normal image
+    CreatedAt DATETIME DEFAULT GETDATE(),
+    FOREIGN KEY (HotelId) REFERENCES Hotels(Id) ON DELETE CASCADE
+);
+
 CREATE TABLE RoomTypes (
     Id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     Name NVARCHAR(50) UNIQUE NOT NULL
@@ -190,3 +199,5 @@ VALUES
     ((SELECT Id FROM StatusTypes WHERE Name = 'Payment'), N'Pending'),
     ((SELECT Id FROM StatusTypes WHERE Name = 'Payment'), N'Failed'),
     ((SELECT Id FROM StatusTypes WHERE Name = 'Payment'), N'Completed');
+
+ALTER TABLE Hotels ADD IsDeleted BIT NOT NULL DEFAULT 0

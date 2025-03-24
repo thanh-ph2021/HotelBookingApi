@@ -1,4 +1,7 @@
-﻿namespace HotelBookingApi.Models;
+﻿using System;
+using System.Collections.Generic;
+
+namespace HotelBookingApi.Models;
 
 public partial class Booking
 {

@@ -1,4 +1,6 @@
-﻿using HotelBookingApi.Models;
+﻿using System;
+using System.Collections.Generic;
+using HotelBookingApi.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace HotelBookingApi.Data;
@@ -19,6 +21,8 @@ public partial class HotelBookingDbContext : DbContext
     public virtual DbSet<Favorite> Favorites { get; set; }
 
     public virtual DbSet<Hotel> Hotels { get; set; }
+
+    public virtual DbSet<HotelImage> HotelImages { get; set; }
 
     public virtual DbSet<Payment> Payments { get; set; }
 
@@ -115,6 +119,24 @@ public partial class HotelBookingDbContext : DbContext
             entity.HasOne(d => d.Owner).WithMany(p => p.Hotels)
                 .HasForeignKey(d => d.OwnerId)
                 .HasConstraintName("FK_Hotels_Owner");
+        });
+
+        modelBuilder.Entity<Hotel>().HasQueryFilter(h => !h.IsDeleted);
+
+        modelBuilder.Entity<HotelImage>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__HotelIma__3214EC07F81CB620");
+
+            entity.Property(e => e.Id).HasDefaultValueSql("(newid())");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.ImageUrl).HasMaxLength(500);
+            entity.Property(e => e.IsBanner).HasDefaultValue(false);
+
+            entity.HasOne(d => d.Hotel).WithMany(p => p.HotelImages)
+                .HasForeignKey(d => d.HotelId)
+                .HasConstraintName("FK__HotelImag__Hotel__1CBC4616");
         });
 
         modelBuilder.Entity<Payment>(entity =>
