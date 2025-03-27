@@ -10,7 +10,7 @@ using System.Security.Claims;
 
 namespace HotelBookingApi.Controllers
 {
-    [Route("api/room")]
+    [Route("api/rooms")]
     [ApiController]
     [Authorize]
     public class RoomController : ControllerBase
@@ -21,10 +21,10 @@ namespace HotelBookingApi.Controllers
             _roomService = roomService;
         }
 
-        [HttpGet("hotelId={id}")]
-        public async Task<IActionResult> GetRoomsByHotelId(Guid id)
+        [HttpGet]
+        public async Task<IActionResult> GetRoomsByHotelId([FromQuery] Guid hotelId)
         {
-            var result = await _roomService.GetRoomsAsync(id);
+            var result = await _roomService.GetRoomsAsync(hotelId);
             return Ok(result);
         }
 
