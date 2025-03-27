@@ -9,9 +9,9 @@ public partial class Room
 
     public Guid HotelId { get; set; }
 
-    public Guid RoomTypeId { get; set; }
-
     public string Name { get; set; } = null!;
+
+    public string? Description { get; set; }
 
     public decimal PricePerNight { get; set; }
 
@@ -19,7 +19,9 @@ public partial class Room
 
     public string? Amenities { get; set; }
 
-    public bool? IsAvailable { get; set; }
+    public int? TotalRooms { get; set; }
+
+    public int? AvailableRooms { get; set; }
 
     public DateTime? CreatedAt { get; set; }
 
@@ -29,5 +31,5 @@ public partial class Room
 
     public virtual Hotel Hotel { get; set; } = null!;
 
-    public virtual RoomType RoomType { get; set; } = null!;
+    public virtual ICollection<RoomImage> RoomImages { get; set; } = new List<RoomImage>();
 }
