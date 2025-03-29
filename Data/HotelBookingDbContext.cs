@@ -56,6 +56,8 @@ public partial class HotelBookingDbContext : DbContext
             entity.HasKey(e => e.Id).HasName("PK__Bookings__3214EC07AF8060DE");
 
             entity.Property(e => e.Id).HasDefaultValueSql("(newid())");
+            entity.Property(e => e.CheckInDate).HasColumnType("datetime");
+            entity.Property(e => e.CheckOutDate).HasColumnType("datetime");
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");

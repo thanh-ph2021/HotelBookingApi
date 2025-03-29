@@ -27,6 +27,8 @@ public partial class Room
 
     public DateTime? UpdatedAt { get; set; }
 
+    public bool IsDeleted { get; set; }
+
     public virtual ICollection<Booking> Bookings { get; set; } = new List<Booking>();
 
     public virtual Hotel Hotel { get; set; } = null!;
