@@ -1,4 +1,5 @@
 ﻿using HotelBookingApi.DTOs;
+using HotelBookingApi.Extentions;
 using HotelBookingApi.Models;
 using HotelBookingApi.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -22,7 +23,7 @@ namespace HotelBookingApi.Controllers
         [HttpGet("profile")]
         public async Task<IActionResult> GetProfile()
         {
-            var userId = GetUserIdFromToken();
+            var userId = User.GetUserId();
 
             var profile = await _userService.GetUserProfileAsync(userId);
             if (profile == null)
@@ -36,7 +37,7 @@ namespace HotelBookingApi.Controllers
         [HttpPut("profile")]
         public async Task<IActionResult> UpdateProfile([FromBody] UserProfileUpdateDto updateProfileDto)
         {
-            var userId = GetUserIdFromToken();
+            var userId = User.GetUserId();
             if (userId == Guid.Empty)
             {
                 return Unauthorized("Invalid user");
@@ -57,7 +58,7 @@ namespace HotelBookingApi.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var userId = GetUserIdFromToken();
+            var userId = User.GetUserId();
             if (userId == Guid.Empty)
                 return Unauthorized("Invalid user.");
 
@@ -68,19 +69,5 @@ namespace HotelBookingApi.Controllers
 
             return Ok("Password changed successfully.");
         }
-
-        private Guid GetUserIdFromToken()
-        {
-            if (User.Identity?.IsAuthenticated != true)
-            {
-                return Guid.Empty;
-            }
-
-            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value
-                              ?? User.FindFirst("id")?.Value;
-
-            return Guid.TryParse(userIdClaim, out var userId) ? userId : Guid.Empty;
-        }
-
     }
 }

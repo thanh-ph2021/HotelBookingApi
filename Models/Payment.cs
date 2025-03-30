@@ -21,6 +21,8 @@ public partial class Payment
 
     public DateTime? CreatedAt { get; set; }
 
+    public DateTime? PaidAt { get; set; }
+
     public virtual Booking Booking { get; set; } = null!;
 
     public virtual PaymentMethod PaymentMethod { get; set; } = null!;

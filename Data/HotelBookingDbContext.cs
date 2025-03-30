@@ -148,6 +148,7 @@ public partial class HotelBookingDbContext : DbContext
             entity.Property(e => e.Id).HasDefaultValueSql("(newid())");
             entity.Property(e => e.Amount).HasColumnType("decimal(10, 2)");
             entity.Property(e => e.CreatedAt).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.PaidAt).HasColumnType("datetime");
             entity.Property(e => e.TransactionId).HasMaxLength(255);
 
             entity.HasOne(d => d.Booking).WithMany(p => p.Payments)
