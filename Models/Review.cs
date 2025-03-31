@@ -11,11 +11,23 @@ public partial class Review
 
     public Guid HotelId { get; set; }
 
-    public int? Rating { get; set; }
+    public string RoomType { get; set; } = null!;
 
-    public string? Comment { get; set; }
+    public int StayDuration { get; set; }
+
+    public DateOnly StayMonth { get; set; }
+
+    public decimal Rating { get; set; }
+
+    public string? Title { get; set; }
+
+    public string? Description { get; set; }
 
     public DateTime? CreatedAt { get; set; }
+
+    public int? UsefulCount { get; set; }
+
+    public int? NotUsefulCount { get; set; }
 
     public virtual Hotel Hotel { get; set; } = null!;
 

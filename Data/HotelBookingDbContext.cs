@@ -196,10 +196,14 @@ public partial class HotelBookingDbContext : DbContext
 
         modelBuilder.Entity<Review>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Reviews__3214EC077DE60600");
+            entity.HasKey(e => e.Id).HasName("PK__Reviews__3214EC0761DCD55C");
 
             entity.Property(e => e.Id).HasDefaultValueSql("(newid())");
             entity.Property(e => e.CreatedAt).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.NotUsefulCount).HasDefaultValue(0);
+            entity.Property(e => e.Rating).HasColumnType("decimal(3, 1)");
+            entity.Property(e => e.RoomType).HasMaxLength(255);
+            entity.Property(e => e.UsefulCount).HasDefaultValue(0);
 
             entity.HasOne(d => d.Hotel).WithMany(p => p.Reviews)
                 .HasForeignKey(d => d.HotelId)
