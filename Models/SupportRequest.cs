@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace HotelBookingApi.Models;
 
-public partial class SupportTicket
+public partial class SupportRequest
 {
     public Guid Id { get; set; }
 

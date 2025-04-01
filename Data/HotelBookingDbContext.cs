@@ -40,7 +40,7 @@ public partial class HotelBookingDbContext : DbContext
 
     public virtual DbSet<StatusType> StatusTypes { get; set; }
 
-    public virtual DbSet<SupportTicket> SupportTickets { get; set; }
+    public virtual DbSet<SupportRequest> SupportRequests { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
 
@@ -275,21 +275,21 @@ public partial class HotelBookingDbContext : DbContext
             entity.Property(e => e.Name).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<SupportTicket>(entity =>
+        modelBuilder.Entity<SupportRequest>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__SupportT__3214EC0785E99484");
+            entity.HasKey(e => e.Id).HasName("PK__SupportR__3214EC07DD6F1F87");
 
             entity.Property(e => e.Id).HasDefaultValueSql("(newid())");
             entity.Property(e => e.CreatedAt).HasDefaultValueSql("(getdate())");
             entity.Property(e => e.Subject).HasMaxLength(255);
             entity.Property(e => e.UpdatedAt).HasDefaultValueSql("(getdate())");
 
-            entity.HasOne(d => d.Status).WithMany(p => p.SupportTickets)
+            entity.HasOne(d => d.Status).WithMany(p => p.SupportRequests)
                 .HasForeignKey(d => d.StatusId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_SupportTickets_Status");
 
-            entity.HasOne(d => d.User).WithMany(p => p.SupportTickets)
+            entity.HasOne(d => d.User).WithMany(p => p.SupportRequests)
                 .HasForeignKey(d => d.UserId)
                 .HasConstraintName("FK_SupportTickets_Users");
         });

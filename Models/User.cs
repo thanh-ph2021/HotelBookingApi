@@ -33,7 +33,7 @@ public partial class User
 
     public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
 
-    public virtual ICollection<SupportTicket> SupportTickets { get; set; } = new List<SupportTicket>();
+    public virtual ICollection<SupportRequest> SupportRequests { get; set; } = new List<SupportRequest>();
 
     public virtual UserRole UserRole { get; set; } = null!;
 }

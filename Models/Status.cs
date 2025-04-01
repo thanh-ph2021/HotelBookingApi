@@ -17,5 +17,5 @@ public partial class Status
 
     public virtual StatusType StatusType { get; set; } = null!;
 
-    public virtual ICollection<SupportTicket> SupportTickets { get; set; } = new List<SupportTicket>();
+    public virtual ICollection<SupportRequest> SupportRequests { get; set; } = new List<SupportRequest>();
 }

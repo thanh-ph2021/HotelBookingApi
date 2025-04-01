@@ -159,7 +159,7 @@ CREATE TABLE Promotions (
     CONSTRAINT FK_Promotions_Hotels FOREIGN KEY (HotelId) REFERENCES Hotels(Id) ON DELETE CASCADE
 );
 
-CREATE TABLE SupportTickets (
+CREATE TABLE SupportRequests (
     Id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     UserId UNIQUEIDENTIFIER NOT NULL,
     Subject NVARCHAR(255) NOT NULL,
@@ -194,7 +194,8 @@ INSERT INTO UserRole(Name) VALUES
 
 INSERT INTO StatusTypes(Name) VALUES 
 ('Booking'), 
-('Payment');
+('Payment'),
+('SupportRequest');
 
 INSERT INTO Status (StatusTypeId, Name) 
 VALUES 
@@ -208,6 +209,12 @@ VALUES
     ((SELECT Id FROM StatusTypes WHERE Name = 'Payment'), N'Pending'),
     ((SELECT Id FROM StatusTypes WHERE Name = 'Payment'), N'Failed'),
     ((SELECT Id FROM StatusTypes WHERE Name = 'Payment'), N'Completed');
+
+INSERT INTO Status (StatusTypeId, Name) 
+VALUES 
+    ((SELECT Id FROM StatusTypes WHERE Name = 'SupportRequest'), N'Pending'),
+    ((SELECT Id FROM StatusTypes WHERE Name = 'SupportRequest'), N'InProgress'),
+    ((SELECT Id FROM StatusTypes WHERE Name = 'SupportRequest'), N'Resolved');
 
 ALTER TABLE Hotels ADD IsDeleted BIT NOT NULL DEFAULT 0
 ALTER TABLE Rooms ADD IsDeleted BIT NOT NULL DEFAULT 0
