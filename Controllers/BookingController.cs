@@ -1,6 +1,7 @@
 ﻿using Azure.Core;
 using HotelBookingApi.Models.Requests;
 using HotelBookingApi.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,6 +9,7 @@ namespace HotelBookingApi.Controllers
 {
     [Route("api/bookings")]
     [ApiController]
+    [Authorize]
     public class BookingController : ControllerBase
     {
         private readonly IBookingService _bookingService;

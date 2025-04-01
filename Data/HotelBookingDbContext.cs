@@ -183,11 +183,13 @@ public partial class HotelBookingDbContext : DbContext
 
         modelBuilder.Entity<Promotion>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Promotio__3214EC07668B10BA");
+            entity.HasKey(e => e.Id).HasName("PK__Promotio__3214EC07B1C6AC2A");
 
             entity.Property(e => e.Id).HasDefaultValueSql("(newid())");
             entity.Property(e => e.CreatedAt).HasDefaultValueSql("(getdate())");
             entity.Property(e => e.DiscountPercentage).HasColumnType("decimal(5, 2)");
+            entity.Property(e => e.EndDate).HasColumnType("datetime");
+            entity.Property(e => e.StartDate).HasColumnType("datetime");
 
             entity.HasOne(d => d.Hotel).WithMany(p => p.Promotions)
                 .HasForeignKey(d => d.HotelId)
@@ -299,6 +301,7 @@ public partial class HotelBookingDbContext : DbContext
             entity.HasIndex(e => e.Email, "UQ__Users__A9D105347D097BE3").IsUnique();
 
             entity.Property(e => e.Id).HasDefaultValueSql("(newid())");
+            entity.Property(e => e.Country).HasMaxLength(50);
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");

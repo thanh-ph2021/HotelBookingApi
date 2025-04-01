@@ -21,6 +21,8 @@ public partial class User
 
     public DateTime? UpdatedAt { get; set; }
 
+    public string? Country { get; set; }
+
     public virtual ICollection<Booking> Bookings { get; set; } = new List<Booking>();
 
     public virtual ICollection<Favorite> Favorites { get; set; } = new List<Favorite>();

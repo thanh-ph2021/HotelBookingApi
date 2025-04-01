@@ -9,7 +9,7 @@ namespace HotelBookingApi.Services
     public class ReviewService : IReviewService
     {
         private readonly IReviewRepository _repository;
-        public ReviewService(IReviewRepository repository, IUserRepository userRepository) 
+        public ReviewService(IReviewRepository repository) 
         {
             _repository = repository;
         }
