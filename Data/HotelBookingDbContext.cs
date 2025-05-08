@@ -24,6 +24,8 @@ public partial class HotelBookingDbContext : DbContext
 
     public virtual DbSet<HotelImage> HotelImages { get; set; }
 
+    public virtual DbSet<OtpRequest> OtpRequests { get; set; }
+
     public virtual DbSet<Payment> Payments { get; set; }
 
     public virtual DbSet<PaymentMethod> PaymentMethods { get; set; }
@@ -137,6 +139,19 @@ public partial class HotelBookingDbContext : DbContext
             entity.HasOne(d => d.Hotel).WithMany(p => p.HotelImages)
                 .HasForeignKey(d => d.HotelId)
                 .HasConstraintName("FK__HotelImag__Hotel__4BAC3F29");
+        });
+
+        modelBuilder.Entity<OtpRequest>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__OtpReque__3214EC0795187211");
+
+            entity.Property(e => e.Id).HasDefaultValueSql("(newid())");
+            entity.Property(e => e.CreatedAt).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.Email).HasMaxLength(255);
+            entity.Property(e => e.IsUsed).HasDefaultValue(false);
+            entity.Property(e => e.OtpCode)
+                .HasMaxLength(255)
+                .IsUnicode(false);
         });
 
         modelBuilder.Entity<Payment>(entity =>

@@ -50,7 +50,16 @@ namespace HotelBookingApi.Services
             var authResponse = new AuthResponseDto
             {
                 Token = token.Token,
-                Expiration = token.Expiration
+                Expiration = token.Expiration,
+                userProfile =
+                {
+                    Id = user.Id,
+                    Email = user.Email,
+                    FullName = user.FullName,
+                    Phone = user.Phone ?? "",
+                    UserRole = userExist.UserRole,
+                    UserRoleId = user.UserRoleId
+                }
             };
 
             return Result<AuthResponseDto>.Success(authResponse);
@@ -96,8 +105,15 @@ namespace HotelBookingApi.Services
             {
                 Token = token.Token,
                 Expiration = token.Expiration,
-                FullName = user.FullName,
-                Email = user.Email
+                userProfile =
+                {
+                    Id = userCreated.Id,
+                    Email = userCreated.Email,
+                    FullName = userCreated.FullName,
+                    Phone = userCreated.Phone ?? "",
+                    UserRole = registerDto.UserRole,
+                    UserRoleId = userCreated.UserRoleId
+                }
             };
 
             return Result<AuthResponseDto>.Success(authResponse);
