@@ -74,20 +74,17 @@ namespace HotelBookingApi.Services
                     PasswordHash = "",
                     UserRoleId = new Guid("7E4E81D0-8163-4EA8-96C6-86B042B9D050")
                 };
-                await _authRepository.CreateUserAsync(newUser);
+                newUser = await _authRepository.CreateUserAsync(newUser);
                 user = new UserProfileDto
                 {
                     FullName = newUser.FullName,
                     Email = newUser.Email,
                     Id = newUser.Id,
-                    UserRole = "Customer"
+                    UserRole = "Customer",
+                    UserRoleId = newUser.UserRoleId
                 };
-                token = _tokenService.GenerateToken(user);
-            } 
-            else
-            {
-                token = _tokenService.GenerateToken(user);
             }
+            token = _tokenService.GenerateToken(user);
 
             var authResponse = new AuthResponseDto
             {

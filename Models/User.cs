@@ -23,6 +23,10 @@ public partial class User
 
     public string? Country { get; set; }
 
+    public string? Avatar { get; set; }
+
+    public string? FacebookId { get; set; }
+
     public virtual ICollection<Booking> Bookings { get; set; } = new List<Booking>();
 
     public virtual ICollection<Favorite> Favorites { get; set; } = new List<Favorite>();

@@ -8,6 +8,8 @@
             public string UserRole { get; set; } = null!;
             public Guid UserRoleId { get; set; }
             public string? Phone { get; set; }
+            public string? Avatar { get; set; }
+            public string? FacebookId { get; set; }
     }
 
 }

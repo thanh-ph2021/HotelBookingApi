@@ -47,5 +47,26 @@ namespace HotelBookingApi.Repositories
                 return user;
             }
         }
+
+        public async Task<UserProfileDto?> GetUserByFacebookIdAsync(string facebookId)
+        {
+            using (var connection = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
+            {
+                await connection.OpenAsync();
+
+                var parameters = new DynamicParameters();
+                parameters.Add("@UserId", null, DbType.Guid);
+                parameters.Add("@Email", null, DbType.String);
+                parameters.Add("@FacebookId", facebookId, DbType.String);
+
+                var user = await connection.QueryFirstOrDefaultAsync<UserProfileDto>(
+                    "UP0001",
+                    parameters,
+                    commandType: CommandType.StoredProcedure
+                );
+
+                return user;
+            }
+        }
     }
 }

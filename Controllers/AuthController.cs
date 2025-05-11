@@ -45,6 +45,20 @@ namespace HotelBookingApi.Controllers
             return Ok(result.Value);
         }
 
+        [HttpPost("login-with-google")]
+        public async Task<IActionResult> LoginWithGoogle([FromBody] GoogleSignInRequest request)
+        {
+            var result = await _authService.GoogleSignInAsync(request.IdToken);
+            return Ok(result);
+        }
+
+        [HttpPost("login-with-facebook")]
+        public async Task<IActionResult> LoginWithFacebook([FromBody] FacebookSignInRequest request)
+        {
+            var result = await _authService.FacebookSignInAsync(request.AccessToken);
+            return Ok(result);
+        }
+
         [HttpPost("verify-otp")]
         public async Task<IActionResult> VerifyOtp([FromBody] VerifyOtpRequest request)
         {

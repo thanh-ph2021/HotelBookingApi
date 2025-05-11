@@ -9,5 +9,7 @@
         public Guid UserRoleId { get; set; }
         public string? Phone { get; set; }
         public string PasswordHash { get; set; } = null!;
+        public string? Avatar { get; set; }
+        public string? FacebookId { get; set; }
     }
 }

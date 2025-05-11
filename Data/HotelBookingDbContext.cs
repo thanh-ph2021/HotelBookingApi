@@ -316,11 +316,13 @@ public partial class HotelBookingDbContext : DbContext
             entity.HasIndex(e => e.Email, "UQ__Users__A9D105347D097BE3").IsUnique();
 
             entity.Property(e => e.Id).HasDefaultValueSql("(newid())");
+            entity.Property(e => e.Avatar).HasMaxLength(500);
             entity.Property(e => e.Country).HasMaxLength(50);
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
             entity.Property(e => e.Email).HasMaxLength(255);
+            entity.Property(e => e.FacebookId).HasMaxLength(50);
             entity.Property(e => e.FullName).HasMaxLength(255);
             entity.Property(e => e.Phone).HasMaxLength(20);
             entity.Property(e => e.UpdatedAt)
